@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<body>
+    <style>
+        @import url("https://fonts.googleapis.com/css?family=Gelasio&display=swap");
+
+        .tablestyle {
+            /* border: 2px solid; */
+            font-family: 'Arial Narrow', Arial, sans-serif;
+            width: 100%;
+            height:100%;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-image: linear-gradient(#abd699, #75c9b7)
+        }
+        .tablestyle td {
+<!--            border: 1px solid;-->
+        }
+        .first_row {
+            height: 10%;
+        }
+        .second_row {
+            height: 45%;
+        }
+        .third_row {
+            height: 40%;
+        }
+        .fourth_row {
+            height: 5%;
+        }
+        .tablestyle td h4 {
+            margin-bottom: 0;
+        }
+        .colcenter {
+            text-align: center;
+        }
+        html, body {
+            height: 100%;
+            overflow: hidden;
+
+        }
+        .widgetBox {
+            border-radius: 25px;
+            background: white;
+            width: 100%;
+            height: 100%;
+        }
+
+        .widget_header {
+            width:100%;
+            background-color: #16123f;
+            border-top-right-radius: 25px;
+            border-top-left-radius: 25px;
+            color: white;
+        }
+        .news_text {
+            color:#16123f
+        }
+        .address {
+            font-size: 24px;
+            color:#16123f;
+            padding: 0px;
+            margin: 0px;
+        }
+        .welcome {
+            font-size: 50px;
+            color:#16123f;
+            padding: 0px;
+            margin: 0px;
+        }
+        .time {
+            font-size: 50px;
+            color:#16123f;
+            padding: 0px;
+            margin: 0px;
+        }
+        .dates {
+            font-size: 24px;
+            color:#16123f;
+            padding: 0px;
+            margin: 0px;
+        }
+
+        .bar {
+            /* position: absolute;
+            top: 0;
+            left: 0; */
+
+            /* padding: 25px 0; */
+
+            /* background-color: #e74c3c; */
+            color: white;
+
+            font-family: Gelasio;
+            font-size: 18px;
+        }
+
+        .bar_content {
+            display: block; /* Important to give the content a width */
+
+            transform: translateX(20%);
+             /* Animation start out of the screen */
+            /* Add the animation */
+            animation: move 20s linear infinite /* infinite make reapeat the animation indefinitely */;
+        }
+
+        .ynet_text{
+            display: inline-block;
+        }
+            /* Create the animation */
+        @keyframes move {
+            to { transform: translateX(-100%); }
+        }
+        .animated-heading {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        /* span#words {
+            font-weight: bolder;
+        } */
+    
+    </style>
+    <table cellpadding="10" id="maintab" class="tablestyle" >
+        <tr class="first_row">
+            <!-- <td rowspan="4" class="colcenter">
+                <img src="http://placehold.it/60x60" alt="Company logo"/> 
+                <h3> Venkateshwara <br /> Enterprises </h3>
+                <p> Shed No. D-30, Industrial Estate, </p>
+                <p> B.H. Road, Tumkur - 572 103, Karnataka </p>
+                <p> Mob: 94803 77407, 98440 91647 </p>
+                <p> TIN: 29690400291 </p>
+            </td> -->
+            <td class="colcenter" width="30%" style="color:#16123f">
+                <p class="time"> 20:21 </p>
+                <p class="dates"> יום חמישי, 16 בנובמבר 2022 <br> ה באייר תש"ח</p>
+            </td>
+            <td class="colcenter" width="30%">
+                <h4 id="book">  </h4>
+            </td>
+            <td align="center" >
+                <p class="welcome"> ערב טוב </p>
+                <p class="address"> העצמאות 12</p>
+            </td>
+            <td align="center">
+                 <img src="{{ url_for('static',filename='resources/pitaro-logo-1.png') }}" alt="" width="100" height="100">
+            </td>
+        </tr>
+        <tr class="second_row">
+            <!-- <td rowspan="2">
+                    <img src="resources/add.jpg" style="display:block;" width="100%" height="100%">
+            </td> -->
+            <td align="center">
+                <div class="widgetBox">
+                    <h2 class="widget_header">Globs חדשות</h2>
+                    <div class="news_text">
+                        <div class="animated-heading">
+                            <span id="globs_titles"></span>
+                        </div>
+                        <script type="text/javascript">
+                            (function () {
+                              var globs_titles = {{ globs_titles_str|safe }},
+                              i = 0;
+                              setInterval(function(){ $('#globs_titles').fadeOut(function(){
+                                  $(this).html(globs_titles[(i = (i + 1) % globs_titles.length)]).fadeIn();
+                                }); }, 3000)
+                            })();
+                        </script>
+                    </div>
+                </div>
+            </td>
+            <td align="center"> 
+
+                <div class="widgetBox">
+                    <h2 class="widget_header">חדשות הספורט</h2>
+                    <div class="news_text">
+                        <div class="animated-heading">
+                            <span id="sport_titles"></span>
+                        </div>
+                        <script type="text/javascript">
+                            (function () {
+                              var sport_titles = {{ one_titles_str|safe }},
+                              i = 0;
+                              setInterval(function(){ $('#sport_titles').fadeOut(function(){
+                                  $(this).html(sport_titles[(i = (i + 1) % sport_titles.length)]).fadeIn();
+                                }); }, 3000)
+                            })();
+                        </script>
+                    </div>
+                </div>
+            </td>            
+            <td colspan="2" rowspan="2" align="center">
+
+                <div class="widgetBox">
+                    <h2 class="widget_header"> הודעות לדיירים </h2>
+                    <div class="news_text">
+                        אין הודעות חדשות.
+                    </div>
+                </div>
+
+            </td>
+
+        </tr>
+        <tr class="third_row"> 
+            <td >
+                <img src="{{ url_for('static',filename='resources/add.jpg') }}" style="display:block;" width="100%" height="100%">
+            </td>
+            <td>
+
+                <div class="u-container-layout u-container-layout-5">
+                    <br>
+                           <script>
+                            (function(d, s, id) {
+                                if (d.getElementById(id)) {
+                                    if (window.__TOMORROW__) {
+                                        window.__TOMORROW__.renderWidget();
+                                    }
+                                    return;
+                                }
+                                const fjs = d.getElementsByTagName(s)[0];
+                                const js = d.createElement(s);
+                                js.id = id;
+                                js.src = "https://www.tomorrow.io/v1/widget/sdk/sdk.bundle.min.js";
+
+                                fjs.parentNode.insertBefore(js, fjs);
+                            })(document, 'script', 'tomorrow-sdk');
+                            </script>
+
+                            <div class="tomorrow"
+                               data-location-id="057564"
+                               data-language="EN"
+                               data-unit-system="METRIC"
+                               data-skin="light"
+                               data-widget-type="upcoming"
+                               style="padding-bottom:0px;position:relative;"
+                            >
+                              <a
+                                href="https://www.tomorrow.io/weather-api/"
+                                rel="nofollow noopener noreferrer"
+                                target="_blank"
+                                style="position: absolute; bottom: 0; transform: translateX(-50%); left: 50%;"
+                              >
+
+                              </a>
+                            </div>
+                  </div>
+            </td>
+
+        </tr>
+        <tr class="fourth_row">
+            <td colspan="3" align="right" style="color:white;">
+<!--                <div class="bar">-->
+<!--                    <span class="bar_content">-->
+<!--                        <div class="ynet_text">-->
+<!--                            {{ ynet_titles_str }}-->
+<!--                        </div>-->
+<!--                    </span>-->
+<!--                  </div>-->
+
+                <div class="animated-heading" >
+                    <span id="ynet_titles" align="right"></span>
+                </div>
+                <script type="text/javascript">
+                    (function () {
+                      var ynet_titles = {{ ynet_titles_str|safe }},
+                      i = 0;
+                      setInterval(function(){ $('#ynet_titles').fadeOut(function(){
+                          $(this).html(ynet_titles[(i = (i + 1) % ynet_titles.length)]).fadeIn();
+                        }); }, 3000)
+                    })();
+                </script>
+            </td>
+            <td align="center">
+                 <img src="{{ url_for('static',filename='resources/ynet.png') }}" alt="" width="100" height="30">
+            </td>
+        </tr>
+       
+    </table>
+
+    <iframe hidden  width="560" height="315" src="https://www.youtube.com/embed/9UMxZofMNbA?autoplay=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+</body>
+</html>
