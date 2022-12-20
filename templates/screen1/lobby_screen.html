@@ -1,10 +1,74 @@
 <!DOCTYPE html>
+
+<script type="text/javascript">
+function display_c(){
+var refresh=1000; // Refresh rate in milli seconds
+mytime=setTimeout('display_ct()',refresh)
+}
+
+function display_ct() {
+
+let _day = {
+            0: 'ראשון',
+            1: 'שני',
+            2: 'שלישי',
+            3: 'רביעי',
+            4: 'חמישי',
+            5: 'שישי',
+            6: 'שבת'
+        }
+        let _month = {
+            1: 'ינואר',
+            2: 'פברואר',
+            3: 'מרץ',
+            4: 'אפריל',
+            5: 'מאי',
+            6: 'יוני',
+            7: 'יולי',
+            8: 'אוגוסט',
+            9: 'ספטמבר',
+            10: 'אוקטובר',
+            11: 'נובמבר',
+            12: 'דצמבר'
+        };
+        let _greet = {
+            1: 'בוקר טוב',
+            2: 'צהריים טובים',
+            3: 'ערב טוב'
+        };
+
+var x = new Date()
+var day=_day[x.getDay()]
+var month=' ב'+(_month[parseInt(x.getMonth()+1)])
+var year = x.getFullYear()
+var date = x.getDate()
+var minutes = x.getMinutes()
+var hours = x.getHours()
+var greeting = _greet[1]
+if (hours > 12) {
+  greeting = _greet[2];
+}
+if (hours > 18 && hours < 23) {
+  greeting = _greet[3];
+}
+document.getElementById('ct').innerHTML = 'יום ' + day + ', ' + date + month + ' ' + year;
+document.getElementById('clock').innerHTML = String(hours).padStart(2, '0') + ':' + String(minutes).padStart(2, '0')
+document.getElementById('greetings').innerHTML = greeting
+
+
+tt=display_c();
+ }
+
+
+
+</script>
+
 <html>
 <!--https://weatherwidget.io/-->
 
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap" rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<body>
+<body onload=display_ct();>
     <style>
         @import url("https://fonts.googleapis.com/css?family=Gelasio&display=swap");
 
@@ -87,14 +151,14 @@
             margin: 0px;
         }
         .welcome {
-            font-size: 50px;
+            font-size: 55px;
             color:white;
             padding: 0px;
             margin: 0px;
             font-weight: bolder;
         }
         .time {
-            font-size: 50px;
+            font-size: 55px;
             color:white;
             padding: 0px;
             margin: 0px;
@@ -150,15 +214,16 @@
     </style>
     <table cellpadding="10" id="maintab" class="tablestyle" >
         <tr class="first_row">
-            <td class="colcenter" rowspan="4" width="40%" style="color:#16123f">
+            <td rowspan="4" width="40%" style="color:#16123f">
                 <img src="{{ url_for('static',filename='resources/add.jpg') }}" style="display:block; border-radius: 25px;" width="100%" height="100%">
             </td>
             <td class="colcenter" width="30%">
-                <p class="time"> 20:21 </p>
-                <p class="dates"> יום חמישי, 16 בנובמבר 2022 <br> ה באייר תש"ח</p>
+                <p class="time"> <span id='clock' ></span> </p>
+                <p class="dates"> <span id='ct' ></span> <br> <script src="https://www.hebcal.com/etc/hdate-he.js">
+</script></p>
             </td>
-            <td align="center" >
-                <p class="welcome"> ערב טוב </p>
+            <td align="center">
+                <p class="welcome"> <span id='greetings' ></span> </p>
                 <p class="address"> העצמאות 12</p>
             </td>
             <td align="center">
@@ -172,7 +237,7 @@
 
             <td rowspan="3" dir="rtl">
                 <div class="widgetBox">
-                    <h2 class="widget_header" align="center">חדשות</h2>
+                    <h1 class="widget_header" align="center">חדשות</h1>
                     <div class="news_text" align="right">
                         <div class="animated-heading">
                             <img src="{{ url_for('static',filename='resources/globs.png') }}" class="news_logo" alt="" width="80" height="40">
@@ -226,7 +291,7 @@
             <td colspan="2" rowspan="3" align="center" dir="rtl">
 
                 <div class="widgetBox">
-                    <h2 class="widget_header"> הודעות לדיירים </h2>
+                    <h1 class="widget_header"> הודעות לדיירים </h1>
                     <div class="news_text" align="right">
                         אין הודעות חדשות.
                     </div>
@@ -257,6 +322,133 @@
     </table>
 
     <iframe hidden  width="560" height="315" src="https://www.youtube.com/embed/9UMxZofMNbA?autoplay=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<script>
+   let _window_vh;
+
+    jQuery(function() {
+        let _foot_height = jQuery(window).height()/10;
+        _nextreload = 1800;
+        jQuery('.next-reload').html(_nextreload);
+        setInterval(function() {
+            _nextreload--;
+            jQuery('.next-reload').html(_nextreload);
+        }, 1000);
+        jQuery('.banner .slider').owlCarousel({rtl:true,autoplay:true,autoplayTimeout:10000,loop:true,items:1,animateOut:'fadeOut',animateIn:'fadeIn',nav:false,dots:false})
+        jQuery('.news-carousel').owlCarousel({rtl:true,autoplay:true,autoplayTimeout:6000,loop:true,items:1,nav:false,dots:false})
+        /*if(jQuery('#marquee').length)
+            jQuery('#marquee').owlCarousel({rtl:true,autoplay:true,autoplayTimeout:3000,loop:true,items:1,animateOut:'fadeOut',animateIn:'fadeIn',nav:false,dots:false})*/
+
+
+
+        window.dispatchEvent(new Event('resize'));
+        _window_vh = jQuery(window).height()/100;
+        jQuery('.site.site-pitaro .sides').css('height', parseInt((_window_vh*89)-jQuery('.foot').height()));
+        jQuery('.site.site-pitaro .left-side .banner .slider img').css('max-height', parseInt((_window_vh*89)-jQuery('.foot').height()));
+
+
+        window.dispatchEvent(new Event('resize'));
+
+        jQuery('.last-reload .hour').html(new Date().getHours());
+        jQuery('.last-reload .minutes').html(new Date().getMinutes());
+        jQuery('.last-reload .minutes').html(new Date().getMinutes());
+
+        setTimeout(function() {
+
+        }, 200)
+        updateTime();
+        setInterval(function() {
+            updateTime();
+        }, 5000);
+
+
+        jQuery('.block.msgs .block-inside').each(function() {
+            scrollBlock(jQuery(this));
+        })
+
+        getWeather();
+
+    })
+
+    function unitTimestamp(timestamp) {
+        return timestamp*1000;
+    }
+
+    function getWeather() {
+        jQuery.get('https://api.openweathermap.org/data/3.0/onecall?lat=33.006360&lon=35.109970&units=metric&appid=f9bec5b2f4294e15c24af2389e13f294', function(res) {
+            //TODAY
+
+            let _todaytemp = res.daily[0]['temp']['day'].toString();
+            _todaytemp = _todaytemp.split('.');
+            console.log();
+
+            jQuery('.weather-blocks .block.today i').html('<img src="http://openweathermap.org/img/wn/'+res.daily[0].weather[0].icon+'@2x.png" alt="" />');
+            jQuery('.weather-blocks .block.today .temp').html(_todaytemp[0]+'°');
+
+            // TOMORROW
+            console.log(res.daily[1]);
+
+            let _tomorrowtemp = res.daily[1]['temp']['day'].toString();
+            _tomorrowtemp = _tomorrowtemp.split('.');
+
+            jQuery('.weather-blocks .block.tomorrow .temp').html(_tomorrowtemp[0]+'°');
+            jQuery('.weather-blocks .block.tomorrow i').html('<img src="http://openweathermap.org/img/wn/'+res.daily[1].weather[0].icon+'@2x.png" alt="" />');
+
+            // 2 DAYS
+
+
+            let _twodaystemp = res.daily[2]['temp']['day'].toString();
+            _twodaystemp = _twodaystemp.split('.');
+
+            console.log(res.daily[2]);
+            jQuery('.weather-blocks .block.twodays .temp').html(_twodaystemp[0]+'°');
+            jQuery('.weather-blocks .block.twodays i').html('<img src="http://openweathermap.org/img/wn/'+res.daily[2].weather[0].icon+'@2x.png" alt="" />');
+        });
+    }
+
+    function scrollBlock(elm) {
+        let _dHeight = elm.height();
+        let _msgsHeight = elm.find('.block-msgs').height();
+        let _msgsCount = elm.find('.block-msgs .item').length;
+        elm.animate({scrollTop: _msgsHeight}, (_msgsCount*10)*600, function() {
+            elm.animate({scrollTop: 0}, 2000, function() {
+                scrollBlock(elm);
+            });
+        })
+    }
+
+    function updateTime() {
+        let _day = {
+            0: 'ראשון',
+            1: 'שני',
+            2: 'שלישי',
+            3: 'רביעי',
+            4: 'חמישי',
+            5: 'שישי',
+            6: 'שבת'
+        }
+        let _month = {
+            1: 'ינואר',
+            2: 'פברואר',
+            3: 'מרץ',
+            4: 'אפריל',
+            5: 'מאי',
+            6: 'יוני',
+            7: 'יולי',
+            8: 'אוגוסט',
+            9: 'ספטמבר',
+            10: 'אוקטובר',
+            11: 'נובמבר',
+            12: 'דצמבר'
+        };
+        jQuery('.time .hour').html(new Date().getHours().toString().padStart(2,0));
+        jQuery('.time .minutes').html(new Date().getMinutes().toString().padStart(2,0));
+        jQuery('.date-day').html(_day[new Date().getDay()]);
+        jQuery('.date').html(new Date().getDate());
+        jQuery('.month').html('ב'+(_month[parseInt(new Date().getMonth()+1)]));
+        jQuery('.year').html(new Date().getFullYear());
+    }
+</script>
 
 </body>
 </html>
