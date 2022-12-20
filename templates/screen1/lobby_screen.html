@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html>
+<!--https://weatherwidget.io/-->
+
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap" rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <body>
@@ -7,7 +9,7 @@
         @import url("https://fonts.googleapis.com/css?family=Gelasio&display=swap");
 
         .tablestyle {
-            /* border: 2px solid; */
+            border: 0px solid;
             font-family: 'Arial Narrow', Arial, sans-serif;
             width: 100%;
             height:100%;
@@ -16,22 +18,26 @@
             bottom: 0;
             left: 0;
             right: 0;
-            background-image: linear-gradient(#abd699, #75c9b7)
+            background-image: linear-gradient(#34626C, #34626C)
         }
         .tablestyle td {
-<!--            border: 1px solid;-->
+            border: 0px solid;
         }
         .first_row {
-            height: 10%;
+            height: 20%;
         }
         .second_row {
-            height: 45%;
+            height: 25%;
         }
         .third_row {
-            height: 40%;
+            height: 25%;
         }
         .fourth_row {
-            height: 5%;
+            height: 25%;
+        }
+        .fifth_row {
+            height: 15%;
+            background-image: linear-gradient(#839B97, #34626C)
         }
         .tablestyle td h4 {
             margin-bottom: 0;
@@ -45,46 +51,58 @@
 
         }
         .widgetBox {
-            border-radius: 25px;
-            background: linear-gradient(white 0%, transparent 100%);
+            background: linear-gradient(#839B97, #839B97 80%);
             width: 100%;
             height: 100%;
+            padding: 0;
+            margin: 0;
+            border-radius: 25px;
+
         }
 
         .widget_header {
             width:100%;
-            background-color: #16123f;
+            background-color: #E9E2D0;
+            color: #34626C;
+            padding: 0;
+            margin-top: 0;
             border-top-right-radius: 25px;
             border-top-left-radius: 25px;
-            color: white;
+
         }
         .news_text {
-            color:#16123f;
+            color:#E9E2D0;
             font-size: 22px;
+            padding: 20px
         }
+
+        .news_logo {
+            padding-left: 20px
+        }
+
         .address {
             font-size: 24px;
-            color:#16123f;
+            color:#839B97;
             padding: 0px;
             margin: 0px;
         }
         .welcome {
             font-size: 50px;
-            color:#16123f;
+            color:white;
             padding: 0px;
             margin: 0px;
             font-weight: bolder;
         }
         .time {
             font-size: 50px;
-            color:#16123f;
+            color:white;
             padding: 0px;
             margin: 0px;
             font-weight: bolder;
         }
         .dates {
             font-size: 24px;
-            color:#16123f;
+            color:#839B97;
             padding: 0px;
             margin: 0px;
         }
@@ -121,8 +139,9 @@
         }
         .animated-heading {
             display: flex;
-            align-items: center;
+<!--            align-items: center;-->
             justify-content: center;
+            padding: 20px;
         }
         /* span#words {
             font-weight: bolder;
@@ -131,20 +150,12 @@
     </style>
     <table cellpadding="10" id="maintab" class="tablestyle" >
         <tr class="first_row">
-            <!-- <td rowspan="4" class="colcenter">
-                <img src="http://placehold.it/60x60" alt="Company logo"/> 
-                <h3> Venkateshwara <br /> Enterprises </h3>
-                <p> Shed No. D-30, Industrial Estate, </p>
-                <p> B.H. Road, Tumkur - 572 103, Karnataka </p>
-                <p> Mob: 94803 77407, 98440 91647 </p>
-                <p> TIN: 29690400291 </p>
-            </td> -->
-            <td class="colcenter" width="30%" style="color:#16123f">
-                <p class="time"> 20:21 </p>
-                <p class="dates"> יום חמישי, 16 בנובמבר 2022 <br> ה באייר תש"ח</p>
+            <td class="colcenter" rowspan="4" width="40%" style="color:#16123f">
+                <img src="{{ url_for('static',filename='resources/add.jpg') }}" style="display:block; border-radius: 25px;" width="100%" height="100%">
             </td>
             <td class="colcenter" width="30%">
-                <h4 id="book">  </h4>
+                <p class="time"> 20:21 </p>
+                <p class="dates"> יום חמישי, 16 בנובמבר 2022 <br> ה באייר תש"ח</p>
             </td>
             <td align="center" >
                 <p class="welcome"> ערב טוב </p>
@@ -154,16 +165,18 @@
                  <img src="{{ url_for('static',filename='resources/pitaro-logo-1.png') }}" alt="" width="100" height="100">
             </td>
         </tr>
+
+
+
         <tr class="second_row">
-            <!-- <td rowspan="2">
-                    <img src="resources/add.jpg" style="display:block;" width="100%" height="100%">
-            </td> -->
-            <td align="center">
+
+            <td rowspan="3" dir="rtl">
                 <div class="widgetBox">
-                    <h2 class="widget_header">Globs חדשות</h2>
-                    <div class="news_text">
+                    <h2 class="widget_header" align="center">חדשות</h2>
+                    <div class="news_text" align="right">
                         <div class="animated-heading">
-                            <span id="globs_titles"></span>
+                            <img src="{{ url_for('static',filename='resources/globs.png') }}" class="news_logo" alt="" width="80" height="40">
+                            <span id="globs_titles" align="right"></span>
                         </div>
                         <script type="text/javascript">
                             (function () {
@@ -175,15 +188,11 @@
                             })();
                         </script>
                     </div>
-                </div>
-            </td>
-            <td align="center"> 
 
-                <div class="widgetBox">
-                    <h2 class="widget_header">חדשות הספורט</h2>
                     <div class="news_text">
                         <div class="animated-heading">
-                            <span id="sport_titles"></span>
+                            <img src="{{ url_for('static',filename='resources/one.png') }}" class="news_logo" alt="" width="80" height="40">
+                            <span id="sport_titles" align="right"></span>
                         </div>
                         <script type="text/javascript">
                             (function () {
@@ -195,91 +204,53 @@
                             })();
                         </script>
                     </div>
+
+                    <div class="news_text">
+                        <div class="animated-heading">
+                            <img src="{{ url_for('static',filename='resources/ynet_logo.png') }}" class="news_logo" alt="" width="80" height="40">
+                            <span id="ynet_titles" align="right"></span>
+                        </div>
+                        <script type="text/javascript">
+                            (function () {
+                              var ynet_titles = {{ ynet_titles_str|safe }},
+                              i = 0;
+                              setInterval(function(){ $('#ynet_titles').fadeOut(function(){
+                                  $(this).html(ynet_titles[(i = (i + 1) % ynet_titles.length)]).fadeIn();
+                                }); }, 3000)
+                            })();
+                        </script>
+                    </div>
                 </div>
-            </td>            
-            <td colspan="2" rowspan="2" align="center">
+            </td>
+
+            <td colspan="2" rowspan="3" align="center" dir="rtl">
 
                 <div class="widgetBox">
                     <h2 class="widget_header"> הודעות לדיירים </h2>
-                    <div class="news_text">
+                    <div class="news_text" align="right">
                         אין הודעות חדשות.
                     </div>
                 </div>
 
             </td>
-
         </tr>
-        <tr class="third_row"> 
-            <td >
-                <img src="{{ url_for('static',filename='resources/add.jpg') }}" style="display:block;" width="100%" height="100%">
-            </td>
-            <td>
 
-                <div class="u-container-layout u-container-layout-5">
-                    <br>
-                           <script>
-                            (function(d, s, id) {
-                                if (d.getElementById(id)) {
-                                    if (window.__TOMORROW__) {
-                                        window.__TOMORROW__.renderWidget();
-                                    }
-                                    return;
-                                }
-                                const fjs = d.getElementsByTagName(s)[0];
-                                const js = d.createElement(s);
-                                js.id = id;
-                                js.src = "https://www.tomorrow.io/v1/widget/sdk/sdk.bundle.min.js";
 
-                                fjs.parentNode.insertBefore(js, fjs);
-                            })(document, 'script', 'tomorrow-sdk');
-                            </script>
 
-                            <div class="tomorrow"
-                               data-location-id=""
-                               data-language="EN"
-                               data-unit-system="METRIC"
-                               data-skin="light"
-                               data-widget-type="upcoming"
-                               style="padding-bottom:0px;position:relative;"
-                            >
-                              <a
-                                href="https://www.tomorrow.io/weather-api/"
-                                rel="nofollow noopener noreferrer"
-                                target="_blank"
-                                style="position: absolute; bottom: 0; transform: translateX(-50%); left: 50%;"
-                              >
 
-                              </a>
-                            </div>
-                  </div>
-            </td>
-
+        <tr class="third_row">
         </tr>
-        <tr class="fourth_row">
-            <td colspan="3" align="right" style="color:white; font-size: 22px;">
-<!--                <div class="bar">-->
-<!--                    <span class="bar_content">-->
-<!--                        <div class="ynet_text">-->
-<!--                            {{ ynet_titles_str }}-->
-<!--                        </div>-->
-<!--                    </span>-->
-<!--                  </div>-->
 
-                <div class="animated-heading" >
-                    <span id="ynet_titles" align="right"></span>
-                </div>
-                <script type="text/javascript">
-                    (function () {
-                      var ynet_titles = {{ ynet_titles_str|safe }},
-                      i = 0;
-                      setInterval(function(){ $('#ynet_titles').fadeOut(function(){
-                          $(this).html(ynet_titles[(i = (i + 1) % ynet_titles.length)]).fadeIn();
-                        }); }, 3000)
-                    })();
+
+
+        <tr class="fourth_row" align="center">
+        </tr>
+        <tr class="fifth_row">
+            <td colspan="4" align="right" style="color:white; font-size: 22px;">
+                <a class="weatherwidget-io" href="https://forecast7.com/he/31d0534d85/israel/" data-label_1="ISRAEL" data-label_2="WEATHER" data-theme="original" data-basecolor="rgba(171, 214, 153, 0)" data-textcolor="#E9E2D0" data-highcolor="#f86161" data-lowcolor="#4990f7" data-suncolor="#ffcd63" data-cloudcolor="#8a8a8a" data-raincolor="#5491e7" data-snowcolor="#8a8a8a" >ISRAEL WEATHER</a>
+                <script>
+                !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
                 </script>
-            </td>
-            <td align="center">
-                 <img src="{{ url_for('static',filename='resources/ynet.png') }}" alt="" width="100" height="30">
             </td>
         </tr>
        
